@@ -31,14 +31,14 @@ export default function FAQ() {
   ];
 
   return (
-    <section className="bg-[#1A1C1F] text-white py-20 px-6">
+    <section className="bg-[#1A1C1F] text-white py-10 md:py-20 px-4 md:px-6">
       <div className="max-w-4xl mx-auto">
         {/* Title */}
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold mb-4">
+        <div className="text-center mb-8 md:mb-16">
+          <h2 className="text-2xl md:text-4xl lg:text-5xl font-bold mb-4">
             Frequently asked questions
           </h2>
-          <p className="text-xl text-gray-300">
+          <p className="text-lg md:text-xl text-gray-300">
             Everything you need to know about the AI & Data service and billing.
           </p>
         </div>
@@ -48,10 +48,10 @@ export default function FAQ() {
           {faqs.map((faq, index) => (
             <div key={index} className="border border-gray-600 rounded-lg">
               <button
-                className="w-full px-6 py-4 text-left flex items-center justify-between hover:bg-gray-700 transition-colors"
+                className="w-full px-4 md:px-6 py-4 text-left flex items-center justify-between hover:bg-gray-700 transition-colors"
                 onClick={() => setOpenIndex(openIndex === index ? null : index)}
               >
-                <span className="text-lg font-medium">{faq.question}</span>
+                <span className="text-base md:text-lg font-medium">{faq.question}</span>
                 <ChevronDownIcon 
                   className={`w-5 h-5 transition-transform ${
                     openIndex === index ? 'rotate-180' : ''
@@ -60,8 +60,8 @@ export default function FAQ() {
               </button>
               
               {openIndex === index && (
-                <div className="px-6 pb-4">
-                  <p className="text-gray-300 leading-relaxed">{faq.answer}</p>
+                <div className="px-4 md:px-6 pb-4">
+                  <p className="text-gray-300 leading-relaxed text-sm md:text-base">{faq.answer}</p>
                 </div>
               )}
             </div>

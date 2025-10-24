@@ -5,7 +5,7 @@ import Image from 'next/image';
 
 export default function Footer() {
   return (
-    <section className="bg-[#1A1C1F] text-white py-20 px-6 relative overflow-hidden">
+    <section className="bg-[#1A1C1F] text-white py-10 md:py-20 px-4 md:px-6 relative overflow-hidden">
       {/* Background Pattern */}
       <div className="absolute inset-0 opacity-10">
         <div className="absolute inset-0 pixel-pattern-dark" />
@@ -16,20 +16,20 @@ export default function Footer() {
         {/* Footer Content */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-end">
           {/* Company Description */}
-          <div>
-            <div className="flex items-center space-x-2 mb-4">
+          <div className="text-center md:text-left">
+            <div className="flex items-center justify-center md:justify-start space-x-2 mb-4">
              <Image src="/footerLogo.svg" alt="Logo" width={68} height={68} />
       
             </div>
-            <p className="text-gray-300 leading-relaxed max-w-md">
+            <p className="text-gray-300 leading-relaxed max-w-md mx-auto md:mx-0 text-sm md:text-base">
               TheAlgoCave is a data and AI consulting company focused on real-time systems, 
               high-frequency data processing, and robust backend development.
             </p>
           </div>
 
           {/* Copyright & Social */}
-          <div className="text-right">
-            <div className="flex justify-end space-x-4">
+          <div className="text-center md:text-right">
+            <div className="flex justify-center md:justify-end space-x-4">
               <button 
                 className="w-8 h-8 bg-gray-700 rounded flex items-center justify-center hover:bg-gray-600 transition-colors"
                 aria-label="Follow us on Facebook"
@@ -48,7 +48,7 @@ export default function Footer() {
               </button>
             </div>
             <div className="mt-4">
-              <p className="text-gray-400 text-sm">
+              <p className="text-gray-400 text-xs md:text-sm">
                 © TheAlgoCave AB — All rights reserved.
               </p>
             </div>
