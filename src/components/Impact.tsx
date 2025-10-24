@@ -1,5 +1,7 @@
 "use client";
 
+import Image from 'next/image';
+
 export default function Impact() {
   const metrics = [
     { value: "10B SEK", label: "Savings delivered across projects" },
@@ -7,16 +9,6 @@ export default function Impact() {
     { value: "250 mm", label: "Queries served monthly" },
   ];
 
-  const clients = [
-    "Quicken",
-    "byte",
-    "hint",
-    "Capital One",
-    "The Home Depot",
-    "Lowe's",
-    "Merriam-Webster",
-    "Roblox",
-  ];
 
   return (
     <section className="bg-[#1A1C1F] text-white py-20 px-4">
@@ -49,7 +41,7 @@ export default function Impact() {
         </div>
         <div className="col-span-12 pt-12">
           <div className="flex items-center justify-center">
-            <img src="/testi.svg" alt="clients" className="w-full h-full" />
+            <Image src="/testi.svg" alt="clients" width={800} height={200} className="w-full h-full" />
           </div>
         </div>
       </div>

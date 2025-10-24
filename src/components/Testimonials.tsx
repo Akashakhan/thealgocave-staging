@@ -50,8 +50,8 @@ export default function Testimonials() {
                 {/* Quote */}
                 <div className="bg-gray-50 p-8 rounded-lg">
                   <blockquote className="text-2xl font-medium text-gray-800 leading-relaxed">
-                    "TheAlgoCave have identified bottlenecks we didn't even see.
-                    Their optimizations directly impacted our bottom line."
+                    &ldquo;TheAlgoCave have identified bottlenecks we didn&apos;t even see.
+                    Their optimizations directly impacted our bottom line.&rdquo;
                   </blockquote>
                 </div>
 

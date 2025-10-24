@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { ChevronDownIcon } from '@heroicons/react/24/outline';
+import Image from 'next/image';
 
 export default function FAQ() {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
@@ -67,7 +68,7 @@ export default function FAQ() {
           ))}
         </div>
       </div>
-      <img src="/world-map.svg" alt="FAQ" className="w-full h-full object-cover mt-12" />
+      <Image src="/world-map.svg" alt="FAQ" width={1200} height={400} className="w-full h-full object-cover mt-12" />
     </section>
   );
 }

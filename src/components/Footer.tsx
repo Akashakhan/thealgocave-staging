@@ -1,6 +1,7 @@
 'use client';
 
-import { ArrowRightIcon } from '@heroicons/react/24/outline';
+import Image from 'next/image';
+
 
 export default function Footer() {
   return (
@@ -17,7 +18,7 @@ export default function Footer() {
           {/* Company Description */}
           <div>
             <div className="flex items-center space-x-2 mb-4">
-             <img src="/footerLogo.svg" alt="Logo" className="w-[68px] h-[68px] " />
+             <Image src="/footerLogo.svg" alt="Logo" width={68} height={68} />
       
             </div>
             <p className="text-gray-300 leading-relaxed max-w-md">

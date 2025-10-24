@@ -1,8 +1,8 @@
 "use client";
 
 import { ChevronDownIcon } from "@heroicons/react/24/outline";
-import DitherPatternComponent from "./DitherPatternComponent";
 import HalftonePatternComponent from "./HalftonePatternComponent";
+import Image from 'next/image';
 
 export default function Hero() {
   return (
@@ -43,14 +43,14 @@ export default function Hero() {
       <header className="relative z-10 flex items-center justify-between px-6 py-6">
         {/* Logo */}
         <div className="flex items-center space-x-2">
-          <img src="/algoLogo.svg" alt="Logo" className="w-[215px] h-[60px] " />
+          <Image src="/algoLogo.svg" alt="Logo" width={215} height={60} />
         </div>
 
         {/* Book a Call Button */}
         <button className="bg-gray-800 text-white px-6 py-4 rounded-lg flex items-center space-x-2 hover:bg-gray-700 transition-colors">
           <span>Book a Call</span>
           <div>I</div>
-          <img src="/arrow.svg" alt="Arrow Right" className="w-4 h-4" />
+          <Image src="/arrow.svg" alt="Arrow Right" width={16} height={16} />
         </button>
       </header>
 
@@ -69,7 +69,7 @@ export default function Hero() {
         </div>
         <div className="grid grid-cols-12">
           <div className="col-span-6 content-center">
-            <img src="/heroText.svg" alt="hero" className="" />
+            <Image src="/heroText.svg" alt="hero" width={400} height={100} />
           </div>
           <h1 className="col-span-6 text-[9rem] mb-4">
             C<span style={{ fontFamily: "Gridular" }}>A</span>VE
