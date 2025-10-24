@@ -10,7 +10,7 @@ interface HalftonePatternSettings {
   intensity: number;
   speed: number;
   dotShape: 'circle' | 'triangle' | 'square' | 'diamond' | 'ordered';
-  animationEffect: string;
+  animationEffect: 'fractal' | 'noise' | 'waves' | 'pulse' | 'flow' | 'sparkle' | 'ripple' | 'swirl' | 'spin' | 'twinkle' | 'flicker' | 'orbit' | 'tornado';
   backgroundColor: string;
   foregroundColor: string;
   threshold: number;
@@ -146,6 +146,7 @@ class HalftonePattern {
     for (let x = 0; x < canvas.width + spacing; x += spacing) {
       for (let y = 0; y < canvas.height + spacing; y += spacing) {
         const distance = Math.sqrt((x - centerX) ** 2 + (y - centerY) ** 2);
+        const angle = Math.atan2(y - centerY, x - centerX);
         
         // Mouse interaction
         let mouseInfluence = 1;
@@ -154,10 +155,10 @@ class HalftonePattern {
           mouseInfluence = 1 + Math.max(0, (100 - mouseDist) / 100) * 2;
         }
         
-        // Animation
+        // Animation based on effect type
         let animationFactor = 1;
         if (settings.isAnimated) {
-          animationFactor = 0.5 + 0.5 * Math.sin(time * 0.003 * settings.speed + distance * 0.01);
+          animationFactor = this.getAnimationFactor(time, distance, angle, x, y, centerX, centerY);
         }
         
         // Calculate final size
@@ -170,6 +171,72 @@ class HalftonePattern {
           this.drawShape(ctx, x, y, finalSize, settings.dotShape);
         }
       }
+    }
+  }
+
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  getAnimationFactor(time: number, distance: number, angle: number, x: number, y: number, _centerX: number, _centerY: number): number {
+    const speed = this.settings.speed;
+    const timeFactor = time * 0.003 * speed;
+    
+    switch (this.settings.animationEffect) {
+      case 'orbit':
+        // Orbital motion - dots move in circular patterns
+        return 0.5 + 0.5 * Math.sin(timeFactor + angle * 2);
+        
+      case 'pulse':
+        // Pulsing effect - all dots pulse together
+        return 0.3 + 0.7 * Math.sin(timeFactor * 2);
+        
+      case 'ripple':
+        // Ripple effect - concentric waves
+        return 0.5 + 0.5 * Math.sin(timeFactor * 3 - distance * 0.02);
+        
+      case 'swirl':
+        // Swirling effect - spiral motion
+        return 0.5 + 0.5 * Math.sin(timeFactor + angle + distance * 0.01);
+        
+      case 'waves':
+        // Wave effect - horizontal waves
+        return 0.5 + 0.5 * Math.sin(timeFactor + x * 0.02);
+        
+      case 'noise':
+        // Noise effect - random-like but deterministic
+        return 0.3 + 0.7 * Math.sin(timeFactor * 5 + x * 0.1 + y * 0.1);
+        
+      case 'sparkle':
+        // Sparkle effect - twinkling dots
+        return 0.2 + 0.8 * Math.sin(timeFactor * 4 + distance * 0.03) * Math.sin(timeFactor * 7);
+        
+      case 'fractal':
+        // Fractal-like recursive pattern
+        return 0.4 + 0.6 * Math.sin(timeFactor + Math.sin(distance * 0.01) * 3);
+        
+      case 'spin':
+        // Spinning effect - rotation around center
+        return 0.5 + 0.5 * Math.sin(timeFactor * 2 + angle * 3);
+        
+      case 'twinkle':
+        // Twinkling stars effect
+        return 0.1 + 0.9 * Math.sin(timeFactor * 6 + distance * 0.05) * Math.sin(timeFactor * 8 + angle);
+        
+      case 'flicker':
+        // Flickering effect
+        return 0.2 + 0.8 * Math.sin(timeFactor * 10 + x * 0.05 + y * 0.05);
+        
+      case 'flow':
+        // Flowing effect - directional movement
+        return 0.5 + 0.5 * Math.sin(timeFactor + x * 0.01 + y * 0.01);
+        
+      case 'tornado':
+        // Tornado effect - spiral motion with vertical component
+        const spiralFactor = Math.sin(timeFactor + angle * 3 + distance * 0.02);
+        const verticalFactor = Math.sin(timeFactor * 2 + distance * 0.01);
+        return 0.3 + 0.7 * spiralFactor * verticalFactor;
+        
+      default:
+        // Default wave effect
+        return 0.5 + 0.5 * Math.sin(timeFactor + distance * 0.01);
     }
   }
   
@@ -235,7 +302,7 @@ const HalftonePatternComponent: React.FC<HalftonePatternComponentProps> = ({
         foregroundColor,
         isAnimated,
         dotShape,
-        animationEffect,
+        animationEffect: animationEffect as 'fractal' | 'noise' | 'waves' | 'pulse' | 'flow' | 'sparkle' | 'ripple' | 'swirl' | 'spin' | 'twinkle' | 'flicker' | 'orbit' | 'tornado',
         mouseInteractive,
         morphing
       });
@@ -259,7 +326,7 @@ const HalftonePatternComponent: React.FC<HalftonePatternComponentProps> = ({
         foregroundColor,
         isAnimated,
         dotShape,
-        animationEffect,
+        animationEffect: animationEffect as 'fractal' | 'noise' | 'waves' | 'pulse' | 'flow' | 'sparkle' | 'ripple' | 'swirl' | 'spin' | 'twinkle' | 'flicker' | 'orbit' | 'tornado',
         mouseInteractive,
         morphing
       });

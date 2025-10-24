@@ -3,7 +3,6 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import HalftonePatternComponent from "./HalftonePatternComponent";
-import DitherPatternComponent from "./DitherPatternComponent";
 
 export default function Services() {
   const targetRef = useRef(null);
@@ -12,53 +11,53 @@ export default function Services() {
     offset: ["start end", "end start"],
   });
 
-  const opacity = useTransform(scrollYProgress, [0, 0.25, 0.3], [1, 1, 0.5]);
+  const opacity = useTransform(scrollYProgress, [0, 0.2, 0.25], [1, 1, 0.5]);
   const display = useTransform(scrollYProgress, (pos) => {
-    return pos < 0.3 ? `block` : `none`;
+    return pos < 0.25 ? `block` : `none`;
   });
   const borderWidth = useTransform(scrollYProgress, (pos) => {
-    return pos < 0.3 ? `2px` : `0px`;
+    return pos < 0.25 ? `2px` : `0px`;
   });
   const opacity2 = useTransform(
     scrollYProgress,
-    [0.3, 0.5, 0.55],
+    [0.25, 0.45, 0.5],
     [0.5, 1, 0.5]
   );
   const display2 = useTransform(scrollYProgress, (pos) => {
-    return pos > 0.3 && pos < 0.55 ? `block` : `none`;
+    return pos > 0.25 && pos < 0.5 ? `block` : `none`;
   });
   const borderWidth2 = useTransform(scrollYProgress, (pos) => {
-    return pos > 0.3 && pos < 0.55 ? `2px` : `0px`;
+    return pos > 0.25 && pos < 0.5 ? `2px` : `0px`;
   });
   const opacity3 = useTransform(
     scrollYProgress,
-    [0.55, 0.75, 0.8],
+    [0.5, 0.7, 0.75],
     [0.5, 1, 0.5]
   );
   const display3 = useTransform(scrollYProgress, (pos) => {
-    return pos > 0.55 && pos < 0.8 ? `block` : `none`;
+    return pos > 0.5 && pos < 0.75 ? `block` : `none`;
   });
   const borderWidth3 = useTransform(scrollYProgress, (pos) => {
-    return pos > 0.55 && pos < 0.8 ? `2px` : `0px`;
+    return pos > 0.5 && pos < 0.75 ? `2px` : `0px`;
   });
-  const opacity4 = useTransform(scrollYProgress, [0.8, 0.95, 1], [0.5, 1, 0.5]);
+  const opacity4 = useTransform(scrollYProgress, [0.75, 0.95, 1], [0.5, 1, 0.5]);
   const display4 = useTransform(scrollYProgress, (pos) => {
-    return pos > 0.8 && pos < 1 ? `block` : `none`;
+    return pos > 0.75 && pos < 1 ? `block` : `none`;
   });
   const borderWidth4 = useTransform(scrollYProgress, (pos) => {
-    return pos > 0.8 && pos < 1 ? `2px` : `0px`;
+    return pos > 0.75 && pos < 1 ? `2px` : `0px`;
   });
 
-  const opacity5 = useTransform(scrollYProgress, [0, 0.25, 0.3], [1, 1, 0]);
+  const opacity5 = useTransform(scrollYProgress, [0, 0.2, 0.25], [1, 1, 0]);
 
   const opacity6 =  useTransform(
     scrollYProgress,
-    [0.3, 0.5, 0.55],
+    [0.25, 0.45, 0.5],
     [0, 1, 0]
   )
 
-  const opacity7 = useTransform(scrollYProgress, [0.55, 0.75, 0.8], [0, 1, 0]);
-  const opacity8 = useTransform(scrollYProgress, [0.8, 0.95, 1], [0, 1, 1]);
+  const opacity7 = useTransform(scrollYProgress, [0.5, 0.7, 0.75], [0, 1, 0]);
+  const opacity8 = useTransform(scrollYProgress, [0.75, 0.95, 1], [0, 1, 1]);
 
 
   return (
@@ -179,17 +178,17 @@ export default function Services() {
               </motion.div>
               <motion.div style={{ placeItems: "center" , opacity:opacity6 }} className=" absolute top-0 ">
                 <div className="rounded-full overflow-hidden w-80 h-80 md:w-96 md:h-96 lg:w-[500px] lg:h-[500px]">
-                  <DitherPatternComponent
+                <HalftonePatternComponent
                     density={100}
-                    size={15}
-                    intensity={70}
+                    size={20}
+                    intensity={50}
                     speed={1.5}
                     backgroundColor="#ffffff"
                     foregroundColor="#000000"
                     isAnimated={true}
-                    pattern="noise"
-                    threshold={0.4}
                     mouseInteractive={true}
+                    dotShape="square"
+                    animationEffect="orbit"
                   />
                 </div>
                 <div className="mt-12">
@@ -206,18 +205,18 @@ export default function Services() {
               </motion.div>
               <motion.div style={{ placeItems: "center" , opacity:opacity7 }} className=" absolute top-0 ">
                 <div className="rounded-full overflow-hidden w-80 h-80 md:w-96 md:h-96 lg:w-[500px] lg:h-[500px]">
-                  <DitherPatternComponent
-                    density={100}
-                    size={15}
-                    intensity={70}
-                    speed={1.5}
-                    backgroundColor="#ffffff"
-                    foregroundColor="#000000"
-                    isAnimated={true}
-                    pattern="fractal"
-                    threshold={0.4}
-                    mouseInteractive={true}
-                  />
+                
+                    <HalftonePatternComponent
+                      density={100}
+                      size={20}
+                      intensity={50}
+                      speed={1}
+                      backgroundColor="#ffffff"
+                      foregroundColor="#000000"
+                      isAnimated={true}
+                      dotShape="circle"
+                      animationEffect="pulse"
+                    />
                 </div>
                 <div className="mt-12">
                   We design high-throughput, event-driven architectures that
@@ -233,17 +232,17 @@ export default function Services() {
               </motion.div>
               <motion.div style={{ placeItems: "center" , opacity:opacity8 }} className=" absolute top-0 ">
                 <div className="rounded-full overflow-hidden w-80 h-80 md:w-96 md:h-96 lg:w-[500px] lg:h-[500px]">
-                  <DitherPatternComponent
+                 
+                  <HalftonePatternComponent
                     density={100}
-                    size={15}
-                    intensity={70}
-                    speed={1.5}
+                    size={20}
+                    intensity={50}
+                    speed={1}
                     backgroundColor="#ffffff"
                     foregroundColor="#000000"
                     isAnimated={true}
-                    pattern="waves"
-                    threshold={0.4}
-                    mouseInteractive={true}
+                    dotShape="circle"
+                    animationEffect="tornado"
                   />
                 </div>
                 <div className="mt-12">

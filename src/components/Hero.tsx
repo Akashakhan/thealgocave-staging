@@ -7,27 +7,9 @@ import Image from 'next/image';
 export default function Hero() {
   return (
     <section className="relative min-h-screen text-white bg-white overflow-hidden">
-      {/* Background Pattern */}
-      <div className="absolute inset-0">
-       {/* <DitherPatternComponent 
-  density={60} 
-  pattern="radial"
-/> */}
-        {/* <DitherPatternComponent
-          density={50}
-          size={32}
-          intensity={80}
-          speed={2.8}
-          backgroundColor="#000000"
-          foregroundColor="#ffffff"
-          isAnimated={true}
-          algorithm="ordered"
-          pattern="fractal"
-          threshold={0.35}
-          animationSpeed={2}
-        /> */}
+      <div className="absolute inset-0">      
         <HalftonePatternComponent
-          density={50}
+          density={80}
           size={32}
           intensity={80}
           speed={2.8}
