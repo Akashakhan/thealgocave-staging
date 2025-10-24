@@ -1,6 +1,7 @@
 "use client";
 
 import { ChevronDownIcon } from "@heroicons/react/24/outline";
+import DitherPatternComponent from "./DitherPatternComponent";
 import HalftonePatternComponent from "./HalftonePatternComponent";
 
 export default function Hero() {
@@ -8,6 +9,23 @@ export default function Hero() {
     <section className="relative min-h-screen text-white bg-white overflow-hidden">
       {/* Background Pattern */}
       <div className="absolute inset-0">
+       {/* <DitherPatternComponent 
+  density={60} 
+  pattern="radial"
+/> */}
+        {/* <DitherPatternComponent
+          density={50}
+          size={32}
+          intensity={80}
+          speed={2.8}
+          backgroundColor="#000000"
+          foregroundColor="#ffffff"
+          isAnimated={true}
+          algorithm="ordered"
+          pattern="fractal"
+          threshold={0.35}
+          animationSpeed={2}
+        /> */}
         <HalftonePatternComponent
           density={50}
           size={32}

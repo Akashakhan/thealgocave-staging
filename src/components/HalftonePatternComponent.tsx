@@ -1,26 +1,49 @@
-'use client';
-
+"use client";
 import React, { useEffect, useRef } from 'react';
 
 // Halftone Pattern Generator - Vanilla JavaScript
 // Generated from Figma Make Halftone Studio
 
-class HalftonePattern {
-  canvas: HTMLCanvasElement;
-  ctx: CanvasRenderingContext2D;
-  mouse: { x: number; y: number };
-  animationId: number | null;
-  startTime: number;
-  settings: any;
+interface HalftonePatternSettings {
+  density: number;
+  size: number;
+  intensity: number;
+  speed: number;
+  dotShape: 'circle' | 'triangle' | 'square' | 'diamond' | 'ordered';
+  animationEffect: string;
+  backgroundColor: string;
+  foregroundColor: string;
+  threshold: number;
+  isAnimated: boolean;
+  mouseInteractive: boolean;
+  morphing: boolean;
+}
 
-  constructor(canvasId: string, options: any = {}) {
-    const canvas = document.getElementById(canvasId) as HTMLCanvasElement;
-    if (!canvas) {
-      throw new Error(`Canvas with id ${canvasId} not found`);
+interface MousePosition {
+  x: number;
+  y: number;
+}
+
+class HalftonePattern {
+  private canvas: HTMLCanvasElement;
+  private ctx: CanvasRenderingContext2D;
+  private mouse: MousePosition;
+  private animationId: number | null;
+  private startTime: number;
+  private settings: HalftonePatternSettings;
+
+  constructor(canvasId: string, options: Partial<HalftonePatternSettings> = {}) {
+    const canvasElement = document.getElementById(canvasId);
+    if (!canvasElement || !(canvasElement instanceof HTMLCanvasElement)) {
+      throw new Error(`Canvas element with id "${canvasId}" not found`);
     }
+    this.canvas = canvasElement;
     
-    this.canvas = canvas;
-    this.ctx = this.canvas.getContext('2d')!;
+    const context = this.canvas.getContext('2d');
+    if (!context) {
+      throw new Error('Failed to get 2D rendering context');
+    }
+    this.ctx = context;
     this.mouse = { x: 0, y: 0 };
     this.animationId = null;
     this.startTime = Date.now();
@@ -31,13 +54,14 @@ class HalftonePattern {
       size: 32,
       intensity: 80,
       speed: 2.8,
-      algorithm: 'ordered',
-      pattern: 'fractal',
-      threshold: 0.36,
-      animationSpeed: 1,
+      dotShape: 'ordered',
+      animationEffect: 'fractal',
       backgroundColor: '#000000',
       foregroundColor: '#ffffff',
+      threshold: 0.36,
       isAnimated: true,
+      mouseInteractive: true,
+      morphing: false,
       ...options
     };
     
@@ -160,7 +184,7 @@ class HalftonePattern {
     }
   }
   
-  updateSettings(newSettings: any) {
+  updateSettings(newSettings: Partial<HalftonePatternSettings>) {
     this.settings = { ...this.settings, ...newSettings };
   }
 }
@@ -173,7 +197,7 @@ interface HalftonePatternComponentProps {
   backgroundColor?: string;
   foregroundColor?: string;
   isAnimated?: boolean;
-  dotShape?: 'circle' | 'triangle' | 'square' | 'diamond';
+  dotShape?: 'circle' | 'triangle' | 'square' | 'diamond' | 'ordered';
   animationEffect?: string;
   mouseInteractive?: boolean;
   morphing?: boolean;
@@ -222,7 +246,7 @@ const HalftonePatternComponent: React.FC<HalftonePatternComponentProps> = ({
         patternRef.current.destroy();
       }
     };
-  }, []);
+  }, [density, size, intensity, speed, backgroundColor, foregroundColor, isAnimated, dotShape, animationEffect, mouseInteractive, morphing]);
 
   useEffect(() => {
     if (patternRef.current) {

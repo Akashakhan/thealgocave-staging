@@ -1,48 +1,56 @@
-'use client';
+"use client";
 
 export default function Impact() {
   const metrics = [
     { value: "10B SEK", label: "Savings delivered across projects" },
     { value: "12 ms", label: "Average latency reduction" },
-    { value: "250 mm", label: "Queries served monthly" }
+    { value: "250 mm", label: "Queries served monthly" },
   ];
 
   const clients = [
-    "Quicken", "byte", "hint", "Capital One", 
-    "The Home Depot", "Lowe's", "Merriam-Webster", "Roblox"
+    "Quicken",
+    "byte",
+    "hint",
+    "Capital One",
+    "The Home Depot",
+    "Lowe's",
+    "Merriam-Webster",
+    "Roblox",
   ];
 
   return (
-    <section className="bg-gray-800 text-white py-20 px-6">
-      <div className="max-w-7xl mx-auto">
-        {/* Title */}
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold leading-tight max-w-4xl mx-auto">
-            We go beyond data and AI consulting turning strategy into execution that delivers measurable impact
-          </h2>
-        </div>
-
-        {/* Metrics */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
-          {metrics.map((metric, index) => (
-            <div key={index} className="text-center">
-              <div className="text-5xl md:text-6xl font-bold text-blue-400 mb-2">
-                {metric.value}
-              </div>
-              <div className="text-lg text-gray-300">
-                {metric.label}
+    <section className="bg-[#1A1C1F] text-white py-20 px-4">
+      <div className="grid grid-cols-12">
+        <div className="col-span-3 opacity-50">OUR NUMBERS</div>
+        <div className="col-span-9 ">
+          <div className="text-7xl opacity-50 tracking-[-3px] mb-8">
+            We go beyond data and AI consulting turning strategy into execution
+            that delivers measurable impact
+          </div>
+          <div className="flex items-start justify-between pb-8 pt-16">
+            <div className="flex flex-col justify-between w-[100%] h-[-webkit-fill-available]">
+              <div className="text-gray-300">{metrics[0].label}</div>
+              <div className="text-blue-400 text-[9rem]" style={{ lineHeight: 'normal' }}>
+                10B <span className="text-[4rem]">SEK</span>
               </div>
             </div>
-          ))}
-        </div>
-
-        {/* Client Logos */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-          {clients.map((client, index) => (
-            <div key={index} className="flex items-center justify-center p-6 bg-gray-700 rounded-lg hover:bg-gray-600 transition-colors">
-              <span className="text-white font-semibold text-lg">{client}</span>
+            <div className='px-5'></div>
+            <div className="flex flex-col col-span-2 w-[100%]">
+              <div>
+                <div className="text-gray-300">{metrics[1].label}</div>
+                <div className="text-blue-400 text-[4rem]">12 ms</div>
+              </div>
+              <div>
+                <div className="text-gray-300">{metrics[2].label}</div>
+                <div className="text-blue-400 text-[4rem]">250 mm</div>
+              </div>
             </div>
-          ))}
+          </div>
+        </div>
+        <div className="col-span-12 pt-12">
+          <div className="flex items-center justify-center">
+            <img src="/testi.svg" alt="clients" className="w-full h-full" />
+          </div>
         </div>
       </div>
     </section>

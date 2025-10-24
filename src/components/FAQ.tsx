@@ -30,7 +30,7 @@ export default function FAQ() {
   ];
 
   return (
-    <section className="bg-gray-800 text-white py-20 px-6">
+    <section className="bg-[#1A1C1F] text-white py-20 px-6">
       <div className="max-w-4xl mx-auto">
         {/* Title */}
         <div className="text-center mb-16">
@@ -67,6 +67,7 @@ export default function FAQ() {
           ))}
         </div>
       </div>
+      <img src="/world-map.svg" alt="FAQ" className="w-full h-full object-cover mt-12" />
     </section>
   );
 }
