@@ -26,7 +26,7 @@ export default function Impact() {
                 10B <span className="text-[2rem] md:text-[4rem]">SEK</span>
               </div>
             </div>
-            <div className="flex flex-col md:flex-col w-full md:w-auto gap-4">
+            <div className="flex flex-col md:flex-col w-full gap-4">
               <div>
                 <div className="text-gray-300 text-sm md:text-base">{metrics[1].label}</div>
                 <div className="text-blue-400 text-[2rem] md:text-[4rem]">12 ms</div>
