@@ -1,7 +1,7 @@
 import { Resend } from 'resend';
 import { NextRequest, NextResponse } from 'next/server';
 
-const resend = new Resend('re_Y7TUpmCf_9DHjTX9UD2i6z9PMyuGL6qDp');
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function POST(request: NextRequest) {
   try {
