@@ -18,7 +18,7 @@ export async function POST(request: NextRequest) {
     // Send email using Resend
     const { data, error } = await resend.emails.send({
       from: 'onboarding@resend.dev',
-      to: 'akashakhan11@gmail.com',
+      to: 'info@thealgocave.io',
       subject: 'Query from Algo Cave',
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">

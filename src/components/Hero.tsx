@@ -8,20 +8,41 @@ import { useState } from "react";
 
 export default function Hero() {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  
+  const backgroundColor = "#ffffff";
+  
+  const getTextColor = (bgColor: string) => {
+    const normalizedColor = bgColor.toLowerCase().trim();
+    
+    if (normalizedColor === '#ffffff' || normalizedColor === 'white' || normalizedColor === '#fff') {
+      return 'text-black';
+    }
+    if (normalizedColor === '#000000' || normalizedColor === 'black' || normalizedColor === '#000') {
+      return 'text-white';
+    }
+    
+    return normalizedColor.includes('fff') || normalizedColor.includes('white') 
+      ? 'text-black' 
+      : 'text-white';
+  };
+  
+  const textColorClass = getTextColor(backgroundColor);
 
   return (
     <section className="relative min-h-screen text-white bg-white overflow-hidden">
       <div className="absolute inset-0">      
         <HalftonePatternComponent
-          density={80}
-          size={32}
-          intensity={80}
-          speed={2.8}
-          backgroundColor="#000000"
-          foregroundColor="#ffffff"
+          density={52}
+          size={60}
+          intensity={10}
+          speed={2}
+          backgroundColor={backgroundColor}
+          foregroundColor="#000000"
           isAnimated={true}
           dotShape="square"
+          animationEffect="quantum_entanglement"
           mouseInteractive={true}
+          morphing={false}
         />
       </div>
 
@@ -44,7 +65,7 @@ export default function Hero() {
       </header>
 
       {/* Main Content */}
-      <div className="relative z-10 text-white px-4 md:px-20 justify-self-center">
+      <div id="inverted-color" className={`relative z-10 ${textColorClass} px-4 md:px-20 justify-self-center`}>
         <div className="text-start">
           <h1 className="text-[4rem] md:text-[9rem] mb-4">
             TH<span style={{ fontFamily: "Gridular" }}>E</span>
@@ -70,9 +91,9 @@ export default function Hero() {
       <div className="grid grid-cols-1 md:grid-cols-12 pb-8">
         <div className="md:col-span-6"></div>
         <div className="md:col-span-6">
-          <div className="flex flex-col items-center space-y-2 text-white">
+          <div className={`flex flex-col items-center space-y-2 ${textColorClass}`}>
           <ChevronDownIcon className="w-5 h-5 animate-bounce" />
-            <div className="text-white text-sm z-10">SCROLL MORE</div>
+            <div className={`${textColorClass} text-sm z-10`}>SCROLL MORE</div>
            
           </div>
         </div>

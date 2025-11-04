@@ -10,7 +10,7 @@ interface HalftonePatternSettings {
   intensity: number;
   speed: number;
   dotShape: 'circle' | 'triangle' | 'square' | 'diamond' | 'ordered';
-  animationEffect: 'fractal' | 'noise' | 'waves' | 'pulse' | 'flow' | 'sparkle' | 'ripple' | 'swirl' | 'spin' | 'twinkle' | 'flicker' | 'orbit' | 'tornado';
+  animationEffect: 'fractal' | 'noise' | 'waves' | 'pulse' | 'flow' | 'sparkle' | 'ripple' | 'swirl' | 'spin' | 'twinkle' | 'flicker' | 'orbit' | 'tornado' | 'quantum_entanglement';
   backgroundColor: string;
   foregroundColor: string;
   threshold: number;
@@ -234,6 +234,13 @@ class HalftonePattern {
         const verticalFactor = Math.sin(timeFactor * 2 + distance * 0.01);
         return 0.3 + 0.7 * spiralFactor * verticalFactor;
         
+      case 'quantum_entanglement':
+        // Quantum entanglement effect - complex interconnected wave patterns
+        const quantum1 = Math.sin(timeFactor * 0.5 + angle * 2 + distance * 0.015);
+        const quantum2 = Math.sin(timeFactor * 0.3 + angle * 3 - distance * 0.02);
+        const quantum3 = Math.cos(timeFactor * 0.7 + angle * 4 + distance * 0.01);
+        return 0.4 + 0.6 * (quantum1 * quantum2 + quantum3 * 0.5);
+        
       default:
         // Default wave effect
         return 0.5 + 0.5 * Math.sin(timeFactor + distance * 0.01);
@@ -302,7 +309,7 @@ const HalftonePatternComponent: React.FC<HalftonePatternComponentProps> = ({
         foregroundColor,
         isAnimated,
         dotShape,
-        animationEffect: animationEffect as 'fractal' | 'noise' | 'waves' | 'pulse' | 'flow' | 'sparkle' | 'ripple' | 'swirl' | 'spin' | 'twinkle' | 'flicker' | 'orbit' | 'tornado',
+        animationEffect: animationEffect as 'fractal' | 'noise' | 'waves' | 'pulse' | 'flow' | 'sparkle' | 'ripple' | 'swirl' | 'spin' | 'twinkle' | 'flicker' | 'orbit' | 'tornado' | 'quantum_entanglement',
         mouseInteractive,
         morphing
       });
@@ -326,7 +333,7 @@ const HalftonePatternComponent: React.FC<HalftonePatternComponentProps> = ({
         foregroundColor,
         isAnimated,
         dotShape,
-        animationEffect: animationEffect as 'fractal' | 'noise' | 'waves' | 'pulse' | 'flow' | 'sparkle' | 'ripple' | 'swirl' | 'spin' | 'twinkle' | 'flicker' | 'orbit' | 'tornado',
+        animationEffect: animationEffect as 'fractal' | 'noise' | 'waves' | 'pulse' | 'flow' | 'sparkle' | 'ripple' | 'swirl' | 'spin' | 'twinkle' | 'flicker' | 'orbit' | 'tornado' | 'quantum_entanglement',
         mouseInteractive,
         morphing
       });
@@ -336,7 +343,11 @@ const HalftonePatternComponent: React.FC<HalftonePatternComponentProps> = ({
   return (
     <canvas
       ref={canvasRef}
-      className="halftone-canvas"
+      style={{
+        width: '100%',
+        height: '100%',
+        display: 'block'
+      }}
     />
   );
 };
