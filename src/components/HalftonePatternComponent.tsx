@@ -17,6 +17,8 @@ interface HalftonePatternSettings {
   isAnimated: boolean;
   mouseInteractive: boolean;
   morphing: boolean;
+  strokeOnly?: boolean;
+  strokeWidth?: number;
 }
 
 interface MousePosition {
@@ -91,19 +93,32 @@ class HalftonePattern {
     }
   }
   
-  drawShape(ctx: CanvasRenderingContext2D, x: number, y: number, size: number, shape: string) {
+  drawShape(ctx: CanvasRenderingContext2D, x: number, y: number, size: number, shape: string, strokeOnly: boolean = false, strokeWidth: number = 1, strokeColor?: string) {
     ctx.save();
     ctx.translate(x, y);
+    
+    if (strokeOnly && strokeColor) {
+      ctx.strokeStyle = strokeColor;
+      ctx.lineWidth = strokeWidth;
+    }
     
     switch (shape) {
       case 'circle':
         ctx.beginPath();
         ctx.arc(0, 0, size / 2, 0, Math.PI * 2);
-        ctx.fill();
+        if (strokeOnly) {
+          ctx.stroke();
+        } else {
+          ctx.fill();
+        }
         break;
         
       case 'square':
-        ctx.fillRect(-size / 2, -size / 2, size, size);
+        if (strokeOnly) {
+          ctx.strokeRect(-size / 2, -size / 2, size, size);
+        } else {
+          ctx.fillRect(-size / 2, -size / 2, size, size);
+        }
         break;
         
       case 'triangle':
@@ -112,7 +127,11 @@ class HalftonePattern {
         ctx.lineTo(-size / 2, size / 2);
         ctx.lineTo(size / 2, size / 2);
         ctx.closePath();
-        ctx.fill();
+        if (strokeOnly) {
+          ctx.stroke();
+        } else {
+          ctx.fill();
+        }
         break;
         
       case 'diamond':
@@ -122,7 +141,11 @@ class HalftonePattern {
         ctx.lineTo(0, size / 2);
         ctx.lineTo(-size / 2, 0);
         ctx.closePath();
-        ctx.fill();
+        if (strokeOnly) {
+          ctx.stroke();
+        } else {
+          ctx.fill();
+        }
         break;
     }
     
@@ -167,8 +190,21 @@ class HalftonePattern {
         const finalSize = dotSize * gradientFactor * animationFactor * mouseInfluence;
         
         if (finalSize > 0.5) {
-          ctx.fillStyle = settings.foregroundColor;
-          this.drawShape(ctx, x, y, finalSize, settings.dotShape);
+          if (settings.strokeOnly) {
+            ctx.strokeStyle = settings.foregroundColor;
+          } else {
+            ctx.fillStyle = settings.foregroundColor;
+          }
+          this.drawShape(
+            ctx, 
+            x, 
+            y, 
+            finalSize, 
+            settings.dotShape,
+            settings.strokeOnly || false,
+            settings.strokeWidth || 1,
+            settings.foregroundColor
+          );
         }
       }
     }
@@ -275,6 +311,8 @@ interface HalftonePatternComponentProps {
   animationEffect?: string;
   mouseInteractive?: boolean;
   morphing?: boolean;
+  strokeOnly?: boolean;
+  strokeWidth?: number;
 }
 
 const HalftonePatternComponent: React.FC<HalftonePatternComponentProps> = ({ 
@@ -288,7 +326,9 @@ const HalftonePatternComponent: React.FC<HalftonePatternComponentProps> = ({
   dotShape = 'circle',
   animationEffect = 'wave',
   mouseInteractive = true,
-  morphing = false
+  morphing = false,
+  strokeOnly = false,
+  strokeWidth = 1
 }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const patternRef = useRef<HalftonePattern | null>(null);
@@ -311,7 +351,9 @@ const HalftonePatternComponent: React.FC<HalftonePatternComponentProps> = ({
         dotShape,
         animationEffect: animationEffect as 'fractal' | 'noise' | 'waves' | 'pulse' | 'flow' | 'sparkle' | 'ripple' | 'swirl' | 'spin' | 'twinkle' | 'flicker' | 'orbit' | 'tornado' | 'quantum_entanglement',
         mouseInteractive,
-        morphing
+        morphing,
+        strokeOnly,
+        strokeWidth
       });
     }
 
@@ -320,7 +362,7 @@ const HalftonePatternComponent: React.FC<HalftonePatternComponentProps> = ({
         patternRef.current.destroy();
       }
     };
-  }, [density, size, intensity, speed, backgroundColor, foregroundColor, isAnimated, dotShape, animationEffect, mouseInteractive, morphing]);
+  }, [density, size, intensity, speed, backgroundColor, foregroundColor, isAnimated, dotShape, animationEffect, mouseInteractive, morphing, strokeOnly, strokeWidth]);
 
   useEffect(() => {
     if (patternRef.current) {
@@ -335,10 +377,12 @@ const HalftonePatternComponent: React.FC<HalftonePatternComponentProps> = ({
         dotShape,
         animationEffect: animationEffect as 'fractal' | 'noise' | 'waves' | 'pulse' | 'flow' | 'sparkle' | 'ripple' | 'swirl' | 'spin' | 'twinkle' | 'flicker' | 'orbit' | 'tornado' | 'quantum_entanglement',
         mouseInteractive,
-        morphing
+        morphing,
+        strokeOnly,
+        strokeWidth
       });
     }
-  }, [density, size, intensity, speed, backgroundColor, foregroundColor, isAnimated, dotShape, animationEffect, mouseInteractive, morphing]);
+  }, [density, size, intensity, speed, backgroundColor, foregroundColor, isAnimated, dotShape, animationEffect, mouseInteractive, morphing, strokeOnly, strokeWidth]);
 
   return (
     <canvas

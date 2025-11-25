@@ -43,6 +43,8 @@ export default function Hero() {
           animationEffect="quantum_entanglement"
           mouseInteractive={true}
           morphing={false}
+          strokeOnly={true}
+          strokeWidth={1}
         />
       </div>
 
